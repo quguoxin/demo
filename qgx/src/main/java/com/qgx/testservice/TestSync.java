@@ -10,9 +10,14 @@ package com.qgx.testservice;
  */
 public class TestSync implements Runnable{
 
+    /**
+     * 可以很直接的反应主线程和其他线程的执行顺序，以及执行原理
+     * 可以将m1和m2的大小颠倒再试试
+     */
+
     int b = 100;
 
-    public synchronized void m1() throws Exception{
+    public  void m1() throws Exception{
         System.out.println("C_"+Thread.currentThread().getName());
         b = 1000;
         Thread.sleep(5000);
