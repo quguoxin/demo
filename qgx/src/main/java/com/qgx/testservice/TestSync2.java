@@ -32,7 +32,7 @@ public class TestSync2 implements Runnable{
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         for (int i = 0;i<20;i++){
             timer.add(Thread.currentThread().getName());
         }
