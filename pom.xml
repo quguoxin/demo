@@ -21,6 +21,7 @@
         <module>qgx</module>
         <module>eureka-sever</module>
         <module>common</module>
+        <module>retrofit</module>
     </modules>
 
     <parent>
