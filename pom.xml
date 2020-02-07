@@ -22,6 +22,9 @@
         <module>eureka-sever</module>
         <module>common</module>
         <module>retrofit</module>
+        <module>websocket-server</module>
+        <module>websocket-client</module>
+        <module>quzrtz</module>
     </modules>
 
     <parent>
