@@ -25,6 +25,7 @@
         <module>websocket-server</module>
         <module>websocket-client</module>
         <module>quzrtz</module>
+        <module>leetcode</module>
     </modules>
 
     <parent>

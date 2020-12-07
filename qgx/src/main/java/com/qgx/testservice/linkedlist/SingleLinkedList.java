@@ -1,7 +1,6 @@
 package com.qgx.testservice.linkedlist;
 
 /**
- * 使用带head头节点的单向链表实现——水浒英雄排行榜管理，完成对英雄人物的增删改查操作
  * Description:  此时为顺序添加，只能在末尾添加
  * Created by qgx on 2020/12/3 23:31
  *
@@ -28,6 +27,34 @@ public class SingleLinkedList {
         // 循环结束后，temp指向的是尾节点
         temp.next = heroNode;// 将next域指向新节点
     }
+
+
+    public void order() {
+        // 链表长度
+        int length = head.length();
+        if (length == 0 || length == 1) {
+            return;
+        }
+        //选择排序 https://www.cnblogs.com/whgk/p/6589920.html
+
+
+
+       /* HeroNode temp = head.next;
+        // 使用冒泡排序
+        // 外层循环次数：节点个数-1（最后一个不需要循环了）
+        for (int i = 1; i < length; i++) {
+            // 内层循环外层每一次循环比较的次数，大的后移
+            for (int j = 1; j < length-i; i++) {
+                if (temp.no > temp.next.no) {
+                    // 交换顺序
+                    HeroNode t = temp.next;
+                    temp.next = temp.next.next;
+                    t.next = temp;
+                }
+            }
+        }*/
+    }
+
 
     // 显示链表
     public void list() {
@@ -57,12 +84,17 @@ public class SingleLinkedList {
         // 创建链表
         SingleLinkedList singleLinkedList = new SingleLinkedList();
         // 加入链表
+        singleLinkedList.add(hero3);
         singleLinkedList.add(hero1);
         singleLinkedList.add(hero2);
-        singleLinkedList.add(hero3);
         singleLinkedList.add(hero4);
 
         // 显示链表
+        System.out.println("长度：" + singleLinkedList.head.length());
+        singleLinkedList.list();
+        HeroNode result = singleLinkedList.head.getNewNode(7);
+        singleLinkedList.head = result;
+        System.out.println("=============排序后===============");
         singleLinkedList.list();
     }
 
