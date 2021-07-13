@@ -39,26 +39,26 @@ import java.util.*;
 
 public class TopKFrequentElements {
     public static void main(String[] args) {
-    Solution solution = new TopKFrequentElements().new Solution();
-}
-
-//leetcode submit region begin(Prohibit modification and deletion)
-class Solution {
-    public int[] topKFrequent(int[] nums, int k) {
-        Map<Integer,Integer> map = new HashMap();
-        // map先统计
-        Arrays.stream(nums).forEach(value -> map.put(value, map.getOrDefault(value,1)+1));
-        // 排序
-        // 排序队列
-        PriorityQueue<Integer> p = new PriorityQueue<>(((o1, o2) -> map.get(o2) - map.get(o1)));
-        p.addAll(map.keySet());
-        int[] re = new int[k];
-        for (int i = 0; i < k; i++) {
-            re[i] = p.remove();
-        }
-        return re;
+        Solution solution = new TopKFrequentElements().new Solution();
     }
-}
+
+    //leetcode submit region begin(Prohibit modification and deletion)
+    class Solution {
+        public int[] topKFrequent(int[] nums, int k) {
+            Map<Integer, Integer> map = new HashMap();
+            // map先统计
+            Arrays.stream(nums).forEach(value -> map.put(value, map.getOrDefault(value, 1) + 1));
+            // 排序
+            // 排序队列
+            PriorityQueue<Integer> p = new PriorityQueue<>(((o1, o2) -> map.get(o2) - map.get(o1)));
+            p.addAll(map.keySet());
+            int[] re = new int[k];
+            for (int i = 0; i < k; i++) {
+                re[i] = p.remove();
+            }
+            return re;
+        }
+    }
 //leetcode submit region end(Prohibit modification and deletion)
 
 }
