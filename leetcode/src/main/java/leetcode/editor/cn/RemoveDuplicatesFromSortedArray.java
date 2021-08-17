@@ -53,7 +53,7 @@ public class RemoveDuplicatesFromSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeDuplicates(int[] nums) {
-            // 注意题目给的是一个排序数组
+           /* // 注意题目给的是一个排序数组
             // 且题目意思是控制台只会输出返回的长度范围内的元素
             // 综上两点可以用快慢指针去做
 
@@ -66,6 +66,18 @@ public class RemoveDuplicatesFromSortedArray {
                     slow++;
                     nums[slow] = nums[fast];
                 }
+            }
+            return slow + 1;*/
+
+           // 2021-07-15
+            int slow = 0;
+            int fast = 1;
+            for (int i = 0; i < nums.length-1; i++) {
+                if (nums[slow] != nums[fast]) {
+                    nums[slow + 1] = nums[fast];
+                    slow++;
+                }
+                fast++;
             }
             return slow + 1;
         }

@@ -51,12 +51,19 @@ public class SingleNumber {
             //////////////////////////////////2
             // ^异或位运算   转换成二进制后比较相同位结果为0 不同为1
             // 所以 A^A = 0   0^A = A
-            int len = nums.length;
+            /*int len = nums.length;
             int result = 0;
             for (int num : nums) {
                 result ^= num;
             }
-            return result;
+            return result;*/
+
+            // 07-16
+            int r = nums[0];
+            for (int i = 1; i < nums.length; i++) {
+                r ^= nums[i];
+            }
+            return r;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

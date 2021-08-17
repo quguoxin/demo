@@ -63,10 +63,12 @@ public class ContainsDuplicate {
 
 
             //////////////////////////////////////3
-            if (nums.length== 0) {
+            /*if (nums.length== 0) {
                 return false;
             }
-            return Arrays.stream(nums).distinct().count()!=nums.length;
+            return Arrays.stream(nums).distinct().count()!=nums.length;*/
+
+            return Arrays.stream(nums).distinct().count() != nums.length;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

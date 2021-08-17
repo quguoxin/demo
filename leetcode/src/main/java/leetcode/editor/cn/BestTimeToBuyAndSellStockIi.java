@@ -45,13 +45,14 @@ package leetcode.editor.cn;
 public class BestTimeToBuyAndSellStockIi {
     public static void main(String[] args) {
         Solution solution = new BestTimeToBuyAndSellStockIi().new Solution();
+        solution.maxProfit(new int[]{7,1,5,3,6,4});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices) {
 
-            // [7,1,5,3,6,4]
+            /*// [7,1,5,3,6,4]
 
 /////////////////////////1 贪心算法  只要前一天比后一天大就卖，卖了再买，只做加法不做减法///////////////////////
             // 利润和
@@ -64,7 +65,36 @@ public class BestTimeToBuyAndSellStockIi {
                 }
                 slow = prices[fast];
             }
+            return sum;*/
+
+            // 2021-07-15
+            // 画折线图，加速度为正的的线段中起点买、终点卖
+            if (prices.length == 1) {
+                return 0;
+            }
+            int sum = 0;
+            int buy = -1;// -1 代表未买   [1,2,3,4,5,6]
+            for (int i = 0; i < prices.length; i++) {
+                // 持有到最后一天，卖
+                if (buy != -1 && i == prices.length - 1) {
+                    sum += prices[i] - buy;
+                    break;
+                }
+                // 未持有到最后一天
+                if (buy == -1 && i == prices.length - 1) {
+                    break;
+                }
+
+                if (prices[i + 1] > prices[i] && buy == -1) { // 买点
+                    buy = prices[i];
+                }
+                if (prices[i + 1] < prices[i] && buy != -1) { // 卖点
+                    sum += prices[i] - buy;//盈利
+                    buy = -1;// 卖出
+                }
+            }
             return sum;
+
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)
