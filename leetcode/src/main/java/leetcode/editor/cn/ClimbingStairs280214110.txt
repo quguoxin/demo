@@ -1,0 +1,64 @@
+    class Solution {
+        public int climbStairs(int n) {
+
+            // f(n)=f(n-1)+f(n-2)
+            // f(n-1)=f(n-2)+f(n-3)
+            // f(n-2)=f(n-3)+f(n-4)
+            // .................
+            // f(2)=f(1)+f(0)
+            // f(1)=1
+            // f(0)=1
+
+            ////////// 递归 n较大时会超时
+//            return recursion1(n);
+
+            ////////// 递归优化 n较大时不会超时
+//            return recursion2(n);
+
+            ////////// 动态规划 不会超时
+            return dynamic(n);
+
+        }
+
+        // 递归1，n较大时会超时
+        private int recursion1(int n) {
+            if (n == 0 || n == 1) {
+                return 1;
+            }
+            return recursion1(n - 1) + recursion1(n - 2);
+        }
+
+        // 递归2，1的优化类型，减少递归过程中的重复计算，中间计算的n 对应的结果可以用map缓存起来
+        HashMap<Integer, Integer> map = new HashMap();
+
+        private int recursion2(int n) {
+            if (map.containsKey(n)) {
+                return map.get(n);
+            }
+            if (n == 0 || n == 1) {
+                return 1;
+            }
+            int sum = recursion2(n - 1) + recursion2(n - 2);
+            map.put(n, sum);
+            return sum;
+        }
+
+        // 动态规划
+        private int dynamic(int n) {
+            if (n < 3) {
+                return n;
+            }
+            int next1 = 1; // 跳上第1个台阶需要的方法f(n-2)（代表了跳上n-2个台阶需要的方法，初始值给1）
+            int next2 = 2; // 跳上第2个台阶需要的方法f(n-1)（代表了跳上n-1个台阶需要的方法，初始值给2）
+            for (int i = 3; i < n; i++) {
+                int temp1 = next1;
+                int temp2 = next2;
+                next1 = temp2;          // f(n-2) = 上一个f(n-1)
+                next2 = temp1 + temp2;  // f(n-1) = 上一个f(n) = 上一个f(n-1)+上一个f(n-2)
+            }
+            return next1 + next2;
+        }
+    }
+
+//runtime:0 ms
+//memory:38 MB
