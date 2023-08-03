@@ -53,6 +53,17 @@ public class RemoveDuplicatesFromSortedArray {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int removeDuplicates(int[] nums) {
+            // 双指针   遍历一直到找到和当前元素不一样的元素，即代表前后元素不一样，此时将该不一样元素移动至该元素后面一位
+            // 然后当前元素往后移动一位，继续找下一个元素和当前元素不一样的元素
+            int slow = 0; // 第一个元素
+            for (int i = 1; i < nums.length; i++) {
+                if (nums[slow]!=nums[i]) { // 找到第二个不一样的元素
+                    nums[slow+1] = nums[i];
+                    slow++;// 此时继续找slow++后面的一位元素
+                }
+            }
+            return slow+1;
+
            /* // 注意题目给的是一个排序数组
             // 且题目意思是控制台只会输出返回的长度范围内的元素
             // 综上两点可以用快慢指针去做
@@ -70,7 +81,7 @@ public class RemoveDuplicatesFromSortedArray {
             return slow + 1;*/
 
            // 2021-07-15
-            int slow = 0;
+            /*int slow = 0;
             int fast = 1;
             for (int i = 0; i < nums.length-1; i++) {
                 if (nums[slow] != nums[fast]) {
@@ -79,7 +90,7 @@ public class RemoveDuplicatesFromSortedArray {
                 }
                 fast++;
             }
-            return slow + 1;
+            return slow + 1;*/
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

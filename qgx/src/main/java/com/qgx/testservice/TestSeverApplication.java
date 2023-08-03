@@ -15,6 +15,7 @@ public class TestSeverApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(TestSeverApplication.class, args);
+
     }
 
 }

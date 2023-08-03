@@ -45,17 +45,32 @@ package leetcode.editor.cn;
 public class BestTimeToBuyAndSellStockIi {
     public static void main(String[] args) {
         Solution solution = new BestTimeToBuyAndSellStockIi().new Solution();
-        solution.maxProfit(new int[]{7,1,5,3,6,4});
+        solution.maxProfit(new int[]{7, 1, 5, 3, 6, 4});
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxProfit(int[] prices) {
+            // 2022.6.7
+            // 贪心算法，取 / 向上的区间进行买卖，所有的的向上区间加起来就是最优解，每个区间为数组相邻两个数
 
-            /*// [7,1,5,3,6,4]
+            // 利润和
+            int sum = 0;
+            // 第一个
+            int slow = prices[0];
+            for (int fast = 1; fast < prices.length; fast++) {
+                if (prices[fast] >= slow) {
+                    sum += prices[fast] - slow;
+                }
+                slow = prices[fast]; // 每次更换买点，保证每次遍历时如果当天大于后一天都可以进行卖出
+            }
+            return sum;
+
+
+            // [7,1,5,3,6,4]
 
 /////////////////////////1 贪心算法  只要前一天比后一天大就卖，卖了再买，只做加法不做减法///////////////////////
-            // 利润和
+            /*// 利润和
             int sum = 0;
             // 买点
             int slow = prices[0];
@@ -67,7 +82,7 @@ public class BestTimeToBuyAndSellStockIi {
             }
             return sum;*/
 
-            // 2021-07-15
+            /*// 2021-07-15
             // 画折线图，加速度为正的的线段中起点买、终点卖
             if (prices.length == 1) {
                 return 0;
@@ -93,7 +108,7 @@ public class BestTimeToBuyAndSellStockIi {
                     buy = -1;// 卖出
                 }
             }
-            return sum;
+            return sum;*/
 
         }
     }

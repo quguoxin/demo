@@ -51,16 +51,17 @@ package leetcode.editor.cn;
 public class MinimumWindowSubstring {
     public static void main(String[] args) {
     Solution solution = new MinimumWindowSubstring().new Solution();
+    solution.minWindow("aabbcc","abc");
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 class Solution {
     public String minWindow(String s, String t) {
-        if (s == null || "".equals(s) || t == null || "".equals(t) || s.length() < t.length()) {
+        if (s == null || s.equals("") || t == null || t.equals("") || s.length() < t.length()) {
             return "";
         }
 
-
+        //
         int[] need = new int[128]; // 已有字符串指定字符的出现次数 ASCII表总长128
         int[] have = new int[128];// 目标字符串指定字符的出现次数
 
@@ -72,7 +73,7 @@ class Solution {
         int left = 0; // 左指针
         int right = 0; // 右指针
         int min = Integer.MAX_VALUE; // 最小长度(初始值为一定不可达到的长度)
-        int count = 0;// 已有字符串中目标字符串指定字符的出现总频次
+        int count = 0;// 窗口区间内在目标子串中出现的次数（不包含超出部分，例如区间aabbc 子串为abbc ，则count为1个a+2个b+1个c为4个）
         int start = 0;// 最小覆盖子串在原字符串中的起始位置
         while (right < s.length()) {
             char r = s.charAt(right);
@@ -81,9 +82,15 @@ class Solution {
                 continue;
             }
 
-            if (have[r] < need[r]) { //  已有字符串目标字符出现的次数小于目标字符串字符的出现次数时count+1；为了后续能直接判断已有字符串是否已经包含了目标字符串的所有字符
-                // 此处为什么不考虑AAB这种重复场景下count为什么不加？？因为不加也没关系，因为have[r]++会加，而下面have[l] == need[l] 才会count减少，
-                // 所有这里即使不加后面在出现多个have[l]时（have[l] > need[l]）时count也不会减少，直到have[l] == need[l]
+            if (have[r] < need[r]) {
+                //  已有字符串目标字符出现的次数小于目标字符串字符的出现次数时count + 1；
+                // 为了后续能直接判断已有字符串是否已经包含了目标字符串的所有字符
+
+                // 此处为什么在（例如ABABCDC-字符串 ABC-子串） 场景移动到第2个A时不加count
+                // 如果加了后续无法直接判断已有字符串是否已经包含了目标字符串的所有字符，刚好count个数对应子串中字符个数，满足count == t.length() 时即满足子串要求进入下一个循环中
+                // 后续循序中在left前移动时，对应count减少的条件也必定是have[r] = need[r]时才减少，这样才能保证count肯定是决定进入或跳出第二循环的参数
+                // 这里have[r]总会增加，所以在二层循环里面left前移动时遇见和子串一样字符时也相应减少，直到减少至have[r] = need[r]时才会导致count减少跳出循环
+
                 count++;
             }
             have[r]++;//已有字符串中目标字符出现的次数+1

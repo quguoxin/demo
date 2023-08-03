@@ -48,7 +48,7 @@ import java.util.Map;
 public class LongestSubstringWithoutRepeatingCharacters {
     public static void main(String[] args) {
         Solution solution = new LongestSubstringWithoutRepeatingCharacters().new Solution();
-        solution.lengthOfLongestSubstring("aab");
+        solution.lengthOfLongestSubstring("abcabcbb");
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -65,8 +65,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
                 char t = s.charAt(r);
                 r++;
                 if (have.containsKey(t)) { // 已存在
-                    max = Math.max(max, r - l - 1); // 结算此时的长度
-                    int temp = have.get(t); // 重复的元素的坐标，不能直接写成while (l <= have.get(t)) 循环过程中移除掉后会空指针
+                    max = Math.max(max, r - l - 1); // 结算此时的长度，此时t坐标处已重复，而r已在t的下一位，所有长度为r-1-l
+                    int temp = have.get(t); // 获取已在区间内的重复值，此时需要将left一直移动到这个重复值的后面去，例如abca,则left得从0移动到1，重复值temp为第一个a
+                    // 重复的元素的坐标，不能直接写成while (l <= have.get(t)) 循环过程中have.get(t)是变化的，移除掉后会空指针
                     while (l <= temp) { // 12341 12343 存在时清除重复元素前面的元素，将l置为重复元素后一位
                         have.remove(s.charAt(l));
                         l++;

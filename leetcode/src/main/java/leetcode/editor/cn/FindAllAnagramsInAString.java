@@ -62,7 +62,7 @@ class Solution {
 
         int l = 0;
         int r = 0;
-        int count = 0;
+        int count = 0;// 集合字符的种类
         List<Integer> res = new ArrayList<>();
         while (r < s.length()) {
             char t = s.charAt(r);

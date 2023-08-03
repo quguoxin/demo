@@ -59,7 +59,7 @@ public class PermutationInString {
 
             int l = 0;
             int r = 0;
-            int count = 0;
+            int count = 0;// 集齐字符的种类
             while (r < s2.length()) {
                 char t = s2.charAt(r);
                 r++;
@@ -70,7 +70,7 @@ public class PermutationInString {
                         count++;
                     }
                 }
-                // 判断左侧窗口是否要收缩
+                // 判断左侧窗口是否要收缩，因为子串的大小是固定s1.length大小
                 while (r - l >= s1.length()) { // 这里r-l不用+1，因为r已在前面+1
                     // 在这里判断是否找到了合法的子串
                     if (count == need.size()) {

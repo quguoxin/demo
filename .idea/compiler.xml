@@ -7,16 +7,28 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka-sever" />
         <module name="qgx" />
+        <module name="common" />
+        <module name="retrofit" />
+        <module name="eureka-sever" />
+        <module name="websocket-server" />
+        <module name="leetcode" />
+        <module name="websocket-client" />
+        <module name="quzrtz" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="common" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="eureka-sever" options="-parameters" />
+      <module name="leetcode" options="-parameters" />
       <module name="qgx" options="-parameters" />
+      <module name="quzrtz" options="-parameters" />
+      <module name="retrofit" options="-parameters" />
+      <module name="websocket-client" options="-parameters" />
+      <module name="websocket-server" options="-parameters" />
     </option>
   </component>
 </project>
